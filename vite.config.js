@@ -1,6 +1,7 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 import ViteFonts from "vite-plugin-fonts"
+import path from 'path'
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -11,5 +12,10 @@ export default defineConfig({
         families: ['Raleway']
       },
     })
-  ]
+  ],
+  resolve: {
+    alias: [
+      { find: '@', replacement: path.resolve(__dirname, 'src') },
+    ],
+  },
 })
