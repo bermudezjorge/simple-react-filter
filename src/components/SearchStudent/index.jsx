@@ -2,8 +2,11 @@ import Input from "@/components/Input"
 import useInput from '@/hooks/use-input'
 import { InputContainer } from './styles'
 
-const SearchStudent = () => {
-    const { value, onChange } = useInput()
+const SearchStudent = ({ search, setSearch }) => {
+    const { value, onChange } = useInput({
+        initialValue: search,
+        update: setSearch
+    })
 
     return (
         <InputContainer>

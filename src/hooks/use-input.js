@@ -1,10 +1,12 @@
 import { useState } from "react";
 
-const useInput = (initialValue) => {
+const useInput = ({ initialValue, update }) => {
     const [value, setValue] = useState(initialValue || '');
 
     const handleChange = (event) => {
-        setValue(event.target.value);
+        const newValue = event.target.value
+        setValue(newValue);
+        update(newValue)
     };
 
     return {

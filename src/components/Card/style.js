@@ -2,7 +2,7 @@ import styled from 'styled-components'
 
 export const CardContainer = styled.li`
     width: 100%;
-    height: 11.5rem;
+    height: ${({ expand }) => expand ? '100%' : '11.5rem'};
     border-bottom: 1px solid #e3e3e3;
     display: flex;
     align-items: center;
@@ -17,8 +17,10 @@ export const Avatar = styled.img`
 `
 
 export const TextContainer = styled.div`
+    width: 100%;
     display: flex;
     flex-direction: column;
+    margin: 1.5rem 0;
     margin-left: 2rem;
 `
 
@@ -40,4 +42,20 @@ export const Info = styled.li`
     margin-top: 0.3rem;
     font-weight: 400;
     color: #a3a3a3;
+`
+
+export const GradesContainer = styled.div`
+    margin-top: 1rem;
+`
+
+export const CardHeader = styled.div`
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+`
+
+export const ExpandButton = styled.img`
+    width: 2.5rem;
+    height: 2.5rem;
+    cursor: pointer;
 `
