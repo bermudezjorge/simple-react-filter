@@ -1,15 +1,17 @@
-import StudentCard from '@/components/StudentCard'
+import Card from '@/components/Card'
 import Layout from './layout/CardLayout'
 import useStudents from "@/hooks/use-students"
+import SearchStudent from './components/SearchStudent'
 
 function App() {
   const students = useStudents()
 
   return (
     <Layout>
+      <SearchStudent />
       <ul>
         {students?.map((student) => (
-          <StudentCard key={student.id} {...student} />
+          <Card key={student.id} {...student} />
         ))}
       </ul>
     </Layout>

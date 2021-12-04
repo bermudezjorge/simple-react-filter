@@ -3,15 +3,21 @@ import react from '@vitejs/plugin-react'
 import ViteFonts from "vite-plugin-fonts"
 import path from 'path'
 
-// https://vitejs.dev/config/
+const Fonts = () => ViteFonts({
+  google: {
+    families: [
+      {
+        name: 'Raleway',
+        styles: 'wght@400;500;700',
+      }
+    ]
+  },
+})
+
 export default defineConfig({
   plugins: [
     react(),
-    ViteFonts({
-      google: {
-        families: ['Raleway']
-      },
-    })
+    Fonts()
   ],
   resolve: {
     alias: [
