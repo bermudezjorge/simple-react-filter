@@ -1,6 +1,5 @@
 import useAverage from "@/hooks/use-average"
 
-
 const StudentCard = student => {
     const studentAverage = useAverage(student.grades)
 
