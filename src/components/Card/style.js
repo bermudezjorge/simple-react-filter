@@ -2,10 +2,8 @@ import styled from 'styled-components'
 
 export const CardContainer = styled.li`
     width: 100%;
-    height: ${({ expand }) => expand ? '100%' : '11.5rem'};
     border-bottom: 1px solid #e3e3e3;
     display: flex;
-    align-items: center;
     padding: 0 2rem;
 `
 
@@ -14,13 +12,15 @@ export const Avatar = styled.img`
     height: 120px;
     border: 1px solid #e3e3e3;
     border-radius: 10rem;
+    margin-top: 2.5rem;
 `
 
 export const TextContainer = styled.div`
     width: 100%;
+    height: 100%;
     display: flex;
     flex-direction: column;
-    margin: 1.5rem 0;
+    margin: 1.2rem 0;
     margin-left: 2rem;
 `
 
@@ -41,7 +41,7 @@ export const Name = styled.h1`
 export const Info = styled.li`
     margin-top: 0.3rem;
     font-weight: 400;
-    color: #a3a3a3;
+    color: #707070;
 `
 
 export const GradesContainer = styled.div`
@@ -58,4 +58,5 @@ export const ExpandButton = styled.img`
     width: 2.5rem;
     height: 2.5rem;
     cursor: pointer;
+    user-select: none;
 `

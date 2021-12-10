@@ -1,18 +1,58 @@
 import { useEffect, useState } from "react"
-import getFullname from '@/utils/get-fullname'
 
-const useFilter = ({ keyword, data }) => {
-    const [filteredData, setFilteredData] = useState()
-    
+const lowerCase = str => str ? str?.toLocaleLowerCase() : null
+
+const useFilter = data => {
+    const [keywords, setKeywords] = useState({})
+    const [filteredData, setFilteredData] = useState(data)
+
     useEffect(() => {
-        const filtered = data?.filter(record => {
-            const fullName = getFullname(record).toLocaleLowerCase()
-            return fullName.includes(keyword.toLocaleLowerCase())
-        })
-        setFilteredData(filtered)
-    }, [keyword, data])
+        setFilteredData(data)
+        if(Object.values(keywords).some(keyword => keyword !== '')) {
+            filterData()
+        }
+    }, [data])
 
-    return filteredData
+    const handleSearch = ({ byKey, value }) => {
+        setKeywords(prevKeywords => Object.assign(prevKeywords, { [byKey]: value }))
+        
+        setFilteredData(data)
+
+        if(Object.values(keywords).some(keyword => keyword !== '')) {
+            filterData()
+        }
+    }
+
+
+    const filterData = () => {
+        const filtered = filteredData.filter(record => {
+            let filtering = false
+
+            if (keywords['fullname'] !== '') {
+                if(lowerCase(record['fullname']).includes(lowerCase(keywords['fullname']))) {
+                    filtering = true
+                }
+                console.log('here', filtering);
+            }
+            
+            if (keywords['tag'] !== '') {
+                console.log('got here');
+                if (record['tags'].length > 0) {
+                    const hasTag = record['tags'].some(tag => lowerCase(tag).includes(lowerCase(keywords['tag'])))
+                    filtering = hasTag
+                }
+            }
+
+            return filtering
+        })
+
+        setFilteredData(filtered)
+    }
+
+    return {
+        data: filteredData,
+        handleSearch
+    }
 }
 
 export default useFilter

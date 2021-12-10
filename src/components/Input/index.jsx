@@ -1,12 +1,12 @@
 import styled from 'styled-components'
 
 const StyledInput = styled.input`
-    width: 100%;
+    width: ${({ width }) => width};
     height: 2.5rem;
     background-color: transparent;
     border: none;
     border-bottom: 2px solid lightgray;
-    font-size: 1.7rem;
+    font-size: ${({ fontSize }) => fontSize};
     font-weight: 500;
     outline: none;
     color: #525252;
@@ -18,8 +18,18 @@ const StyledInput = styled.input`
     }
 `
 
-const Input = ({ type, placeholder, value, onChange }) => (
-    <StyledInput type={type || 'text'} placeholder={placeholder} value={value} onChange={onChange} />
-)
+const Input = props => {
+    let injectedProps = {
+        width : props.width || "100%",
+        fontSize: props.fontSize || "1.2rem",
+        type: props.type || 'text',
+        placeholder: props.placeholder || '',
+        onKeyUp: props.onChange
+    }
+    
+    return (
+        <StyledInput {...injectedProps} />
+    )
+}
 
 export default Input

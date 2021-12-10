@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import TagContainer from '@/components/TagContainer'
 import useAverage from "@/hooks/use-average"
 import getFullname from '@/utils/get-fullname'
 import {
@@ -15,10 +16,10 @@ import {
 import plusSvg from '@/assets/icons/plus.svg'
 import minusSvg from '@/assets/icons/minus.svg'
 
-const Card = student => {
+const Card = ({ addTags, dataIndex, student }) => {
     const [expand, setExpand] = useState(false)
     const studentAverage = useAverage(student.grades)
-    
+
     const handleCardExpandtion = () => {
         setExpand(expand ? false : true)
     }
@@ -39,12 +40,17 @@ const Card = student => {
                     {   expand &&
                         (
                             <GradesContainer>
-                                {student.grades.map((grade, index) => (
+                                {student.grades?.map((grade, index) => (
                                     <Info key={index}>{`Test ${index}:  ${grade}%`}</Info>
                                 ))}
                             </GradesContainer>
                         )
                     }
+                    <TagContainer
+                        student={student}
+                        addTags={addTags}
+                        dataIndex={dataIndex}
+                    />
                 </InfoContainer>
             </TextContainer>
         </CardContainer>
