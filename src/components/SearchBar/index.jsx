@@ -3,11 +3,11 @@ import useInput from '@/hooks/use-input'
 import { useEffect } from "react"
 import { InputContainer } from './styles'
 
-const SearchBar = ({ placeholder, byKey, handleSearch }) => {
+const SearchBar = ({ placeholder, handleSearch }) => {
     const { value, onChange } = useInput('')
 
     useEffect(() => {
-        handleSearch({ byKey, value })
+        handleSearch(value)
     }, [value])
 
     return (

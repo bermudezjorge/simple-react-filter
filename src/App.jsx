@@ -1,4 +1,3 @@
-import { useState } from 'react'
 import Card from '@/components/Card'
 import Layout from './layout/CardLayout'
 import useStudents from '@/hooks/use-students'
@@ -7,12 +6,12 @@ import useFilter from '@/hooks/use-filter'
 
 function App() {
   const { students, addTags } = useStudents()
-  const { data, handleSearch } = useFilter(students)
+  const { data, setSearchFullname, setSearchTags } = useFilter(students)
 
   return (
     <Layout>
-      <SearchBar byKey="fullname" placeholder="Search by name" handleSearch={handleSearch} />
-      <SearchBar byKey="tag" placeholder="Search by tag" handleSearch={handleSearch} />
+      <SearchBar placeholder="Search by name" handleSearch={setSearchFullname} />
+      <SearchBar placeholder="Search by tag" handleSearch={setSearchTags} />
       <ul>
         {data?.map((student, index) => (
           <Card

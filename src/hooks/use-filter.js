@@ -2,48 +2,41 @@ import { useEffect, useState } from "react"
 
 const lowerCase = str => str ? str?.toLocaleLowerCase() : null
 
-const useFilter = data => {
-    const [keywords, setKeywords] = useState({})
-    const [filteredData, setFilteredData] = useState(data)
+const useFilter = initialData => {
+    const [searchFullname, setSearchFullname] = useState('')
+    const [searchTags, setSearchTags] = useState('')
+    const [filteredData, setFilteredData] = useState(initialData)
 
     useEffect(() => {
-        setFilteredData(data)
-        if(Object.values(keywords).some(keyword => keyword !== '')) {
+        setFilteredData(initialData)
+        if(searchFullname !== '' || searchTags !== '') {
             filterData()
         }
-    }, [data])
-
-    const handleSearch = ({ byKey, value }) => {
-        setKeywords(prevKeywords => Object.assign(prevKeywords, { [byKey]: value }))
-        
-        setFilteredData(data)
-
-        if(Object.values(keywords).some(keyword => keyword !== '')) {
-            filterData()
-        }
-    }
+    }, [initialData, searchFullname, searchTags])
 
 
     const filterData = () => {
-        const filtered = filteredData.filter(record => {
-            let filtering = false
+        const filtered = [...initialData].filter(record => {
+            let filtersPassed = 0
 
-            if (keywords['fullname'] !== '') {
-                if(lowerCase(record['fullname']).includes(lowerCase(keywords['fullname']))) {
-                    filtering = true
-                }
-                console.log('here', filtering);
+            if (searchFullname !== '' && lowerCase(record['fullname']).includes(lowerCase(searchFullname))) {
+                filtersPassed += 1
             }
             
-            if (keywords['tag'] !== '') {
-                console.log('got here');
-                if (record['tags'].length > 0) {
-                    const hasTag = record['tags'].some(tag => lowerCase(tag).includes(lowerCase(keywords['tag'])))
-                    filtering = hasTag
-                }
+            if (searchTags !== '' && record['tags'].length > 0 && record['tags'].some(tag => lowerCase(tag).includes(searchTags))) {
+                filtersPassed += 1
             }
 
-            return filtering
+            if (searchFullname !== '' && searchTags !== '') {
+                if (filtersPassed === 2) {
+                    return true
+                }
+
+                return false
+            }
+            
+            if (filtersPassed === 1)
+                return true
         })
 
         setFilteredData(filtered)
@@ -51,7 +44,8 @@ const useFilter = data => {
 
     return {
         data: filteredData,
-        handleSearch
+        setSearchFullname,
+        setSearchTags
     }
 }
 
