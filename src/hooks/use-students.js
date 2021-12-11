@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect} from 'react'
 import getFullname from '@/utils/get-fullname'
 
 const URL = 'https://api.hatchways.io/assessment/students'

@@ -16,7 +16,7 @@ import {
 import plusSvg from '@/assets/icons/plus.svg'
 import minusSvg from '@/assets/icons/minus.svg'
 
-const Card = ({ addTags, dataIndex, student }) => {
+const Card = ({ dataIndex, student, addTags }) => {
     const [expand, setExpand] = useState(false)
     const studentAverage = useAverage(student.grades)
 
@@ -48,8 +48,8 @@ const Card = ({ addTags, dataIndex, student }) => {
                     }
                     <TagContainer
                         student={student}
-                        addTags={addTags}
                         dataIndex={dataIndex}
+                        addTags={addTags}
                     />
                 </InfoContainer>
             </TextContainer>

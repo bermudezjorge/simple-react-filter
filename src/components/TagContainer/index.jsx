@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react'
+import { useRef } from 'react'
 import Tag from '@/components/Tag'
 import Input from '@/components/Input'
 import useInput from '@/hooks/use-input'

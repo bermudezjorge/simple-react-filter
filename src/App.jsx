@@ -1,7 +1,7 @@
 import Card from '@/components/Card'
-import Layout from './layout/CardLayout'
+import Layout from '@/layout/CardLayout'
 import useStudents from '@/hooks/use-students'
-import SearchBar from './components/SearchBar'
+import SearchBar from '@/components/SearchBar'
 import useFilter from '@/hooks/use-filter'
 
 function App() {
@@ -16,9 +16,9 @@ function App() {
         {data?.map((student, index) => (
           <Card
             key={student.id}
-            addTags={addTags}
             dataIndex={index}
-            student={student}  
+            student={student}
+            addTags={addTags}
           />
         ))}
       </ul>
